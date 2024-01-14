@@ -1,0 +1,28 @@
+version: '3'
+# ejemplo de una aplicación con 2 servicios
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD={MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+# Configuramos variable de entorno PMA_HOST con nombre de servicio mysql. Así phpMyadmin no pregunta por el nombre del host al que queremos conecntarnos
+      - PMA_HOST=mysql
+# Indicamos que el servicio depende del servicio mysql y que no podrá inciarse hasta que el servicio mysql esté iniciado
+    depends_on: 
+      - mysql 
+
+volumes:
+  mysql_data:

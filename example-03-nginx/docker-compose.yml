@@ -1,0 +1,9 @@
+version: '3'
+# Ejemplo de un servicio Nginx HTTP server
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes: 
+      - ./src:/usr/share/nginx/html

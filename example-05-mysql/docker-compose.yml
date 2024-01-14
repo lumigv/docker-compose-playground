@@ -1,0 +1,24 @@
+version: '3'
+# Ejemplo de un servicio MySQL
+services:
+# Definimos un servicio con el nombre mysql
+  mysql:
+  # Configuramos que la imagen mysql sera la que utilice el contenedor
+    image: mysql:8.0
+    restart: always
+    # Solo versiones PHP anteriores a 7.4
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    environment: 
+# Lista de variables a utilizar por el contenedor del servicio
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    volumes:
+# Configura los volúmenes que queremos crear en el contendor  del servicio
+      - mysql_data:/var/lib/mysql
+volumes:
+# Incluimos el nombre del volumen mysql_data
+  mysql_data:
