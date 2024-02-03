@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   wordpress:
     image: wordpress
@@ -15,7 +14,6 @@ services:
     depends_on:
       - mysql
     restart: always
-
   mysql:
     image: mysql:8.0
     ports:
@@ -28,7 +26,6 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     restart: always
-
   phpmyadmin:
     image: phpmyadmin
     ports:
@@ -36,7 +33,6 @@ services:
     environment: 
       - PMA_ARBITRARY=1
     restart: always
-
 volumes: 
   mysql_data:
   wordpress_data:
