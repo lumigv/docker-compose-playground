@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de control</title>
+</head>
+<body>
+    <header>
+        <h1>Panel de control</h1>
+        <nav>
+            <li><a href='index.html'>Productos</a></li>
+            <li><a href='categorias.html'>Categorias</a></li>
+        </nav>
+    </header>
+    <main>
+       <h2>Alta de productos</h2><!--El documento de acción se encarga de guardar el producto nuevo-->
+       <form method="post" action="alta_producto.php" enctype="multipart/form-data"><!--Si maneja imágenes se tiene que inclui esta etiqueta para adjuntar archivos-->
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre del producto" autocomplete="off" />
+            </div>
+            <div>
+                <label for="imagen">Imagen</label>
+                <input type="file" name="nombre" id="imagen" accept="image/jpeg,image/png" />
+            </div>
+            <div>
+                <label>Catgorías</label>
+                <div>
+                    <label><input type="checkbox" name="categoria" value="pizza" />Pizzas</label>
+                    <label><input type="checkbox" name="categoria" value="bebida" />Bebidas</label>
+                </div>
+            </div>
+            <div>
+                <label for="estado">Estado</label>
+                <select name="estado" id="estado">
+                    <option>Activo</option>
+                    <option>Inactivo</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Agregar categoría </button>
+                <button type="button" onclick="location.href='index.html'">Cancelar</button>
+            </div>
+       </form>
+    </main>
+</body>
+</html>
