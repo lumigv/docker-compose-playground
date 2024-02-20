@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services: 
   apache:
@@ -6,37 +6,38 @@ services:
     ports: 
       - 80:80
     environment: 
-      - DB_HOST=mysql
-      - DB_NAME=${MYSQL_DATABASE}
-      - DB_USER=${MYSQL_USER}
-      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_HOST=mariadb
+      - DB_NAME=${MARIADB_DATABASE}
+      - DB_USER=${MARIADB_USER}
+      - DB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
       - ./src:/var/www/html
     depends_on:
-      - mysql
+      - mariadb
 
-  mysql:
-    image: mysql:8.0
+  mariadb:
+    image: mariadb
     ports:
       - 3306:3306
     environment: 
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - LANG=C.UTF-8
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d 
-
+    restart: always
+  
   phpmyadmin:
     image: phpmyadmin
     ports:
       - 8080:80
     environment:
-      - PMA_HOST=mysql
+      - PMA_HOST=mariadb
     depends_on: 
       - mysql 
-
 volumes:
-  mysql_data:
+  mariadb_data:
+  
